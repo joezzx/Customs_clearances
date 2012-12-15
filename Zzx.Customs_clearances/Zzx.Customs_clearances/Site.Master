@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <title>
             <%: Page.Title %>
-            - My ASP.NET Application</title>
+            - 哈哈哈</title>
              <% if (false) { %><%--Designer support--%>
                <link href="~/Content/Site.css" rel="stylesheet" />
              <% } %>
