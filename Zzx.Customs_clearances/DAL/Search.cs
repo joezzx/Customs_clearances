@@ -38,6 +38,7 @@ namespace DAL
             DataTable table = DBHelper.GetDataSet(safeSql);
             foreach (DataRow row in table.Rows)
             {
+              
                 Duty_c duty_c = new Duty_c();
                 duty_c.duty_id = (string)row["duty_id"];
                 duty_c.name = (string)row["name"];
@@ -47,6 +48,8 @@ namespace DAL
              
                 duty_c.type=(int)row["type"]; //FK
                 list.Add(duty_c);
+       
+              
             }
             return list;
         }
