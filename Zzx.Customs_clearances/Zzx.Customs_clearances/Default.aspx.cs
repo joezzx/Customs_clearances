@@ -16,18 +16,22 @@ namespace Zzx.Customs_clearances
 {
     public partial class _Default : Page
     {
-               string name = string.Empty;
-            string price= string.Empty;
-            string rate = string.Empty;
+       string name = string.Empty;
+       string price= string.Empty;
+       string rate = string.Empty;
 
-            public string lister = string.Empty;  //返回界面值;
+         public string lister = string.Empty;  //返回界面值;
+         public string Tag = string.Empty; //热门标签
 
         public string nocontext = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
+            CreatTag();
             if (Request.QueryString["KeyWord"] != null && Request.QueryString["KeyWord"].ToString().Trim() != "")
             {
-                Listbind(Request.QueryString["KeyWord"]);
+                SearchKeywordManager.Search(TextBox1.Text);        //用于统计搜索关键字的方法       
+
+                Listbind(Request.QueryString["KeyWord"]);   //该处是否请求一个新的页面有待考虑
             }
             else
             {
@@ -38,13 +42,14 @@ namespace Zzx.Customs_clearances
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (TextBox1.Text=="")
+            if (TextBox1.Text.Trim()=="")
             {
                 //ajax方法？
             }
             else
             {
-            Listbind(TextBox1.Text);
+                SearchKeywordManager.Search(TextBox1.Text);        //用于统计搜索关键字的方法       
+                Listbind(TextBox1.Text);  //根据输入结果生成前台数据
 
             }
         }
@@ -91,6 +96,24 @@ namespace Zzx.Customs_clearances
                     lister += "<a href=default.aspx?KeyWord=" + list[i].name + ">" + list[i].name + "</a>  ";
                 }
             }
+        }
+
+        //生成热门标签
+        private void CreatTag()
+        {
+            Tag = "";
+            IList<SearchKeyword> Tags = new List<SearchKeyword>();
+            Tags = BLL.SearchKeywordManager.GetHottag();
+            if (Tags.Count>=1)
+            {
+                Tag = "热门标签：   ";
+                for (int i = 0; i < Tags.Count; i++)
+                {
+                    Tag += "<a href=default.aspx?KeyWord=" + Tags[i].keyword + ">" + Tags[i].keyword + "</a>  ";
+                }
+            }
+     
+
         }
     }
 

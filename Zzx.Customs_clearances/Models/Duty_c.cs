@@ -15,8 +15,14 @@ namespace Models
 
         public int price { get; set; }
 
+        public string relatedwords { get; set; }
+   
         public double rate { get; set; }
 
-        public int type { get; set; }
+        public int type { get; set; }  //外键
+        
+        public int limits { get; set; }  //外键
+
+        public int grade { get; set; }  //外键
     }
 }

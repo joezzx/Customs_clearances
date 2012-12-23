@@ -23,6 +23,7 @@ namespace DAL
             if (keyword.Trim().Length > 0)
             {
                 safeSql += " where name like '%" + keyword + "%'";
+                safeSql += "or relatedwords like '%" + keyword + " %'";
             }
             return GetPartialGoodsBySql(safeSql);
         }
@@ -45,8 +46,9 @@ namespace DAL
                 duty_c.price = (int)row["price"];
                 duty_c.unit=(string)row["unit"];
                 duty_c.rate=(double)row["rate"];
-             
-                duty_c.type=(int)row["type"]; //FK
+                duty_c.limits=(int)row["limits"];  //外键
+                duty_c.grade = (int)row["grade"];  //外键
+                duty_c.type=(int)row["type"]; //外键
                 list.Add(duty_c);
        
               

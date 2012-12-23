@@ -6,7 +6,7 @@
             <p>
                 <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                 <asp:Button ID="Button1" runat="server" Text="搜一搜" OnClick="Button1_Click" />
-            </p>
+           <%=Tag %> </p>
            <div class="one">
             <ul class="round">
          
