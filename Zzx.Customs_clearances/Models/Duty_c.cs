@@ -19,7 +19,7 @@ namespace Models
    
         public double rate { get; set; }
 
-        public int type { get; set; }  //外键
+        public Goods_Type type { get; set; }  //外键
         
         public int limits { get; set; }  //外键
 

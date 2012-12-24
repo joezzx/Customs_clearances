@@ -1,11 +1,11 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zzx.Customs_clearances._Default" %>
+﻿<%@ Page Title="任我游-致力于为旅客通关服务" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zzx.Customs_clearances._Default" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <section class="featured">
         <div class="content-wrapper">
             <p>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                <asp:Button ID="Button1" runat="server" Text="搜一搜" OnClick="Button1_Click" />
+                <input  placeholder="任我游-致力于为旅客通关服务" ID="TextBox1" runat="server" />
+                <asp:Button ID="Button1" runat="server" Text="搜索" OnClick="Button1_Click" />
            <%=Tag %> </p>
            <div class="one">
             <ul class="round">
@@ -20,7 +20,7 @@
     </section>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <h3>We suggest the following:</h3>
+    <h3>个人行李物品通关小贴士:</h3>
     <ol class="round">
         <li class="one">
             <h5>Getting Started</h5>

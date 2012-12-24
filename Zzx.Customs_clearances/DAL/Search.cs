@@ -39,19 +39,26 @@ namespace DAL
             DataTable table = DBHelper.GetDataSet(safeSql);
             foreach (DataRow row in table.Rows)
             {
-              
+                int typeid;
                 Duty_c duty_c = new Duty_c();
                 duty_c.duty_id = (string)row["duty_id"];
                 duty_c.name = (string)row["name"];
                 duty_c.price = (int)row["price"];
                 duty_c.unit=(string)row["unit"];
                 duty_c.rate=(double)row["rate"];
+                if (row["relatedwords"] !=DBNull.Value)
+                { 
+                    duty_c.relatedwords = (string)row["relatedwords"]; 
+                }
+                else
+                {
+                    duty_c.relatedwords = "无";
+                }//相关词库列表
+                typeid = (int)row["type"];
                 duty_c.limits=(int)row["limits"];  //外键
                 duty_c.grade = (int)row["grade"];  //外键
-                duty_c.type=(int)row["type"]; //外键
-                list.Add(duty_c);
-       
-              
+                duty_c.type=GoodsType.GetGoodsTypeById(typeid); //外键
+                list.Add(duty_c);           
             }
             return list;
         }

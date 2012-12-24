@@ -19,6 +19,8 @@ namespace Zzx.Customs_clearances
        string name = string.Empty;
        string price= string.Empty;
        string rate = string.Empty;
+       string relatedwords = string.Empty;
+       string goods_type = string.Empty;
 
          public string lister = string.Empty;  //返回界面值;
          public string Tag = string.Empty; //热门标签
@@ -26,30 +28,36 @@ namespace Zzx.Customs_clearances
         public string nocontext = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
-            CreatTag();
-            if (Request.QueryString["KeyWord"] != null && Request.QueryString["KeyWord"].ToString().Trim() != "")
+            //根据是否初次加载判定文本框的赋值
+            if (!IsPostBack)
             {
-                SearchKeywordManager.Search(TextBox1.Text);        //用于统计搜索关键字的方法       
-
-                Listbind(Request.QueryString["KeyWord"]);   //该处是否请求一个新的页面有待考虑
+                CreatTag();
+                if (Request.QueryString["KeyWord"] != null && Request.QueryString["KeyWord"].ToString().Trim() != "")
+                {
+                    TextBox1.Value = Request.QueryString["KeyWord"];
+                    Listbind(Request.QueryString["KeyWord"]);   //该处是否请求一个新的页面有待考虑
+                }
+                else
+                {
+                    ViewState["KeyWord"] = "";
+                }
             }
             else
             {
-                ViewState["KeyWord"] = "";
-            }
+                CreatTag();
 
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (TextBox1.Text.Trim()=="")
+            if (TextBox1.Value.Trim()=="")
             {
                 //ajax方法？
             }
             else
             {
-                SearchKeywordManager.Search(TextBox1.Text);        //用于统计搜索关键字的方法       
-                Listbind(TextBox1.Text);  //根据输入结果生成前台数据
+                Listbind(TextBox1.Value);  //根据输入结果生成前台数据
 
             }
         }
@@ -73,20 +81,23 @@ namespace Zzx.Customs_clearances
         //通过列表的方法实现不同的返回结果
         private void Listbind(string text)
         {
+            SearchKeywordManager.Search(TextBox1.Value);        //用于统计搜索关键字的方法       
             lister = "";
             IList<Duty_c> list = new List<Duty_c>();
             list = BLL.Search.SearchGoods(text);
             if (list.Count<1)
             {
-                lister = "Sorry~ 您搜索的内容没有找到，您可以选择<a href='AdvancdSearch.aspx'>高级搜索</a>";
+                lister = "Sorry~ 您搜索的  <font color='red'>" + text + "</font>  没有找到，您可以选择<a href='AdvancdSearch.aspx'>高级搜索</a>";
             }
             if (list.Count == 1)
             {
                 Duty_c duty = list[0];
-                name = "  <li class='one'>您输入的物品相关的项目是:" + duty.name + "</li>";
-                price = "<li class='one'>完税价格是;" + duty.price.ToString() + "元/" + duty.unit + "</li>";
-                rate = "<li class='one'>税率是;" + duty.rate.ToString() +"</li>";
-                lister = name + price + rate;
+                goods_type="<li class='one'>您输入的物品属于:  " + duty.type.overname + "--->" +duty.type.midname + "--->" + duty.type.name + "</li>";
+                name = "<li class='one'>您输入的物品相关的品名是:  " + duty.name + "</li>";
+                relatedwords = "<li class='one'>该品目相关的关键词:  " + duty.relatedwords.ToString() + "</li>";
+                price = "<li class='one'>完税价格是:  " + duty.price.ToString() + "元/" + duty.unit + "</li>";
+                rate = "<li class='one'>税率是:  " + duty.rate.ToString() +"</li>";
+                lister = goods_type + name + relatedwords + price + rate;
             }
             if (list.Count > 1)
             {
