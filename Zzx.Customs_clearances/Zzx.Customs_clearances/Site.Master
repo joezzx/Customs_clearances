@@ -13,6 +13,8 @@
     <asp:PlaceHolder runat="server">        
            <link href="<%: ResolveUrl("~/Content/themes/base/jquery.ui.all.css") %>" rel="stylesheet" type="text/css" /> 
            <link href="<%: ResolveUrl("~/Content/Site.css") %>" rel="stylesheet" type="text/css" /> 
+                   <link href="<%: ResolveUrl("~/Content/css/bootstrap.css") %>" rel="stylesheet" type="text/css" /> 
+
            <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
            <script src="<%: ResolveUrl("~/Scripts/modernizr-2.0.6-development-only.js") %>"></script>
     </asp:PlaceHolder>

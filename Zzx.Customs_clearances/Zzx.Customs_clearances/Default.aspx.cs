@@ -87,16 +87,16 @@ namespace Zzx.Customs_clearances
             list = BLL.Search.SearchGoods(text);
             if (list.Count<1)
             {
-                lister = "Sorry~ 您搜索的  <font color='red'>" + text + "</font>  没有找到，您可以选择<a href='AdvancdSearch.aspx'>高级搜索</a>";
+                lister = "Sorry~ 您搜索的  <font color='red'>" + text + "</font>  没有找到，您可以选择<a href='AdvancedSearch.aspx'>高级搜索</a>";
             }
             if (list.Count == 1)
             {
                 Duty_c duty = list[0];
-                goods_type="<li class='one'>您输入的物品属于:  " + duty.type.overname + "--->" +duty.type.midname + "--->" + duty.type.name + "</li>";
-                name = "<li class='one'>您输入的物品相关的品名是:  " + duty.name + "</li>";
-                relatedwords = "<li class='one'>该品目相关的关键词:  " + duty.relatedwords.ToString() + "</li>";
-                price = "<li class='one'>完税价格是:  " + duty.price.ToString() + "元/" + duty.unit + "</li>";
-                rate = "<li class='one'>税率是:  " + duty.rate.ToString() +"</li>";
+                goods_type="<li class='one'>您输入的物品属于:  " + duty.type.overname + "--->" +duty.type.midname + "--->" + duty.type.name + "</li><br/>";
+                name = "<li class='one'>您输入的物品相关的品名是:  " + duty.name + "</li><br/>";
+                relatedwords = "<li class='one'>该品目相关的关键词:  " + duty.relatedwords.ToString() + "</li><br/>";
+                price = "<li class='one'>完税价格是:  " + duty.price.ToString() + "元/" + duty.unit + "</li><br/>";
+                rate = "<li class='one'>税率是:  " + duty.rate.ToString() + "</li><br/>";
                 lister = goods_type + name + relatedwords + price + rate;
             }
             if (list.Count > 1)
