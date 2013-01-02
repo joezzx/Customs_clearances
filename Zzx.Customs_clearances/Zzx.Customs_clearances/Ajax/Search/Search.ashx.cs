@@ -49,7 +49,6 @@ namespace Zzx.Customs_clearances.Ajax.Search
                 {
                     search.Duty = list[0];
                     search.Error = false;
-                    search.HasResult = true;
                     //goods_type = "<li class='one'>您输入的物品属于:  " + duty.type.overname + "--->" + duty.type.midname + "--->" + duty.type.name + "</li><br/>";
                     //name = "<li class='one'>您输入的物品相关的品名是:  " + duty.name + "</li><br/>";
                     //relatedwords = "<li class='one'>该品目相关的关键词:  " + duty.relatedwords.ToString() + "</li><br/>";

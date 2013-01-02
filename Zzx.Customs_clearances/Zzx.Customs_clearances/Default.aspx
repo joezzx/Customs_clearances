@@ -13,18 +13,10 @@
             </div>
             <Search:SearchTag ID="SearchTag1" runat="server" />
             <div class="one">
-            
-
-       <h4>Goods</h4>
-              <ul  data-bind="foreach: SearchNames">   
-                 <li>      
-                    Goods at position <span data-bind="text: $index"> </span>:
-                        <b data-bind="text: $data"></b>
-
-                          <a href="#" data-bind="click: $parent.removeGoods">Remove</a>
-                                                  </li>               
-              </ul>          
-                <button data-bind="click: addGoods">Add</button>
+            <div id="occassion1"></div>
+            <div id="occassion2"></div>
+                <div id="occassion3"></div>
+     
             </div>
         </div>
     </section>
@@ -43,13 +35,28 @@
                     success: function (data) {
                         var json = JSON.parse(data);
                         if (json.SearchTakes == null) {
+                            occassion1.disabled = false;
+                            occassion2.disabled = true;
+                            occassion1.innerHTML = "";
+                            occassion2.innerHTML = "";
+                            var str1 = "<span data-bind='text: Name'></span><br/><span data-bind='text: Rate'></span>";
+                            occassion1.innerHTML = str1;
+
                             var ReturnModels = {
                                 Name: ko.observable(json.Duty.name),  
                                 Rate: ko.observable(json.Duty.rate)
                             };
                             ko.applyBindings(ReturnModels);
+                           
                                             }
                         else {
+                            occassion1.disabled = true;
+                            occassion2.disabled = false;
+                            occassion1.innerHTML = "";
+                            occassion2.innerHTML = "";
+                            var str2 = "  <h4>Goods</h4><ul  data-bind='foreach: SearchNames'><li>Goods at position <span data-bind='text: $index'> </span>:       <b data-bind='text: $data'></b>  <a href='#' data-bind='click: $parent.removeGoods'>Remove</a>  </li> </ul>    <button data-bind='click: addGoods'>Add</button>";
+                            occassion2.innerHTML = str2;
+
                             function AppViewModel() {
                                 var self = this;
                                 self.SearchNames = ko.observableArray(json.SearchTakes);
