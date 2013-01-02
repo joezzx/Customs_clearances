@@ -9,7 +9,7 @@ using Models;
 namespace DAL
 {
     public class SearchKeywords
-    { 
+    {
         // 根据关键字内容获得关键字对象
         public static SearchKeyword GetKeyword(string keyword)
         {
@@ -122,7 +122,7 @@ namespace DAL
                 throw e;
             }
 
-        }		
+        }
 
         //获取热门标签的方法
         public static IList<SearchKeyword> GetHottag()
@@ -135,11 +135,9 @@ namespace DAL
         private static IList<SearchKeyword> GetSearchKeywordsBySql(string safeSql)
         {
             List<SearchKeyword> list = new List<SearchKeyword>();
-
             try
             {
                 DataTable table = DBHelper.GetDataSet(safeSql);
-
                 foreach (DataRow row in table.Rows)
                 {
                     SearchKeyword searchKeyword = new SearchKeyword();
@@ -147,28 +145,23 @@ namespace DAL
                     searchKeyword.id = (int)row["Id"];
                     searchKeyword.keyword = (string)row["Keyword"];
                     searchKeyword.searchCount = (int)row["SearchCount"];
-
                     list.Add(searchKeyword);
                 }
-
                 return list;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null;
             }
-
+            return list;
         }
 
         private static IList<SearchKeyword> GetSearchKeywordsBySql(string sql, params SqlParameter[] values)
         {
             List<SearchKeyword> list = new List<SearchKeyword>();
-
             try
             {
                 DataTable table = DBHelper.GetDataSet(sql, values);
-
                 foreach (DataRow row in table.Rows)
                 {
                     SearchKeyword searchKeyword = new SearchKeyword();
@@ -176,18 +169,15 @@ namespace DAL
                     searchKeyword.id = (int)row["Id"];
                     searchKeyword.keyword = (string)row["Keyword"];
                     searchKeyword.searchCount = (int)row["SearchCount"];
-
                     list.Add(searchKeyword);
                 }
-
                 return list;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null;
             }
-
+            return list;
         }
 
     }
